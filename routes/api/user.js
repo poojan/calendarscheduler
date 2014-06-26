@@ -72,4 +72,17 @@ router.post('/:id/team', function (req, res) {
   });
 });
 
+router.delete('/:id/team', function (req, res) {
+  var userId = req.params.id;
+  var teacherId = req.body.teacherId;
+
+  //models.User.update({ _id: userId }, { $unset: { team: { _id: teacherId } } }, { multi: false }, function (err, numberAffected, raw) {
+  models.User.update({ _id: userId }, { $pull: { team: { _id: teacherId } } }, { multi: false }, function (err, numberAffected, raw) {
+    if (!numberAffected) { return res.send(204); }
+    if (err) { return res.send(err); }
+
+    return res.send(200);
+  });
+});
+
 module.exports = router;

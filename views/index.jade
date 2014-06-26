@@ -6,6 +6,7 @@ block content
     #user-team
       each teacher in team
         p= teacher.name
+          button.removeFromTeam(data-user-id="#{user._id}" data-teacher-id="#{teacher._id}") Remove
 
   .well
     h3 New Teachers
