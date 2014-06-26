@@ -29,7 +29,9 @@ router.get('/book', function(req, res) {
 
   var username = req.user ? req.user.username : '';
 
-  var teachers = models.Teacher.getAll();
+  //var teachers = models.Teacher.getAll();
+  var teachers = models.User.getTeam(req.user._id);
+
   res.render('book', { username: username, title: 'Express', teachers: teachers });
 });
 
