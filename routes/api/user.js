@@ -25,7 +25,7 @@ router.post('/', function (req, res) {
 router.get('/:id', function (req, res) {
   var fields = '_id username team';
   var userId = req.params.id;
-  var user = models.User.findOne(userId, fields).exec()
+  var user = models.User.findById(userId, fields).exec()
     .then(function (err, user) {
       if (err) { return res.send(err); }
       if (!user) { return res.send(204); }
@@ -49,6 +49,18 @@ router.delete('/:id', function (req, res) {
   models.User.remove({ _id: userId }, function (err, user) {
     if (err) { return res.send(err); }
     if (!user) { return res.send(204); }
+
+    return res.send(200);
+  });
+});
+
+router.post('/:id/team', function (req, res) {
+  var userId = req.params.id;
+  var teacherId = req.body.teacherId;
+
+  models.User.update({ _id: userId }, { $addToSet: { team: { _id: teacherId } } }, { multi: false }, function (err, numberAffected, raw) {
+    if (!numberAffected) { return res.send(204); }
+    if (err) { return res.send(err); }
 
     return res.send(200);
   });

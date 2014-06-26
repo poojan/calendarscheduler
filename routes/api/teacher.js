@@ -39,7 +39,7 @@ router.post('/', function (req, res) {
 router.get('/:id', function (req, res) {
   var fields = '_id name sex dob info image availability';
   var teacherId = req.params.id;
-  var teacher = models.Teacher.findOne(teacherId, fields).exec()
+  var teacher = models.Teacher.findById(teacherId, fields).exec()
     .then(function (err, teacher) {
       if (err) { return res.send(err); }
       if (!teacher) { return res.send(204); }
