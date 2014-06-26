@@ -1,6 +1,6 @@
 var dbHost, dbPort, dbUser, dbPass, dbName, mongoUri;
 
-if (typeof($OPENSHIFT_MONGODB_DB_HOST) === 'undefined') {
+if (!process.env.OPENSHIFT_NODEJS_IP) {
   dbHost = 'localhost';
   dbPort = 27017;
   dbUser = null;
