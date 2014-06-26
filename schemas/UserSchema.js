@@ -25,7 +25,8 @@ module.exports = function(mongoose, conn){
 
     var fields = '_id name sex dob info image availability';
     //this.find($or: teacherFilter, fields, promise.resolve.bind(promise));
-    mongoose.model('Teacher').find({ $or: teacherFilter }, fields, promise.resolve.bind(promise));
+    teacherFilter = teacherFilter.length ? { $or: teacherFilter } : { 1: 2 };
+    mongoose.model('Teacher').find(teacherFilter, fields, promise.resolve.bind(promise));
     //this.find({}, fields, promise.resolve.bind(promise));
     return promise;
   };
