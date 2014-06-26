@@ -1,11 +1,16 @@
 'use strict';
 
 var mongoose = require('mongoose');
+var config = require('../config');
 
-var mongoUri = require('../config').mongoUri;
+var mongoUri = config.mongoUri;
 
 //var mongoUri = 'mongodb://localhost/calendar_scheduler'; // TODO: Move this into a global config
-mongoose.connect(mongoUri);
+mongoose.connect(mongoUri, {
+  user: config.dbUser,
+  pass: config.dbPass,
+  name: config.dbName
+});
 
 var Lesson = new mongoose.Schema({
   // TODO
