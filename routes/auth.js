@@ -53,7 +53,8 @@ router.post('/register', function (req, res) {
 
   newUser.save(function (err, newUser, numberAffected) {
     if (err) { return res.json(err); }
-    return res.send(200);
+    return res.redirect('/');
+    //return res.send(200);
   });
 });
 
