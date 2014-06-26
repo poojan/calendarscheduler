@@ -13,10 +13,10 @@ router.get('/', function(req, res) {
 
   var teachers = models.Teacher.getAll();
 
-  var teamIds = req.user.team;
-  var team = models.User.getTeam(teamIds);
+  var team = models.User.getTeam(req.user._id);
 
   res.render('index', {
+    user: req.user,
     username: username,
     title: 'Express',
     teachers: teachers,

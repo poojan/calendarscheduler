@@ -54,6 +54,12 @@ router.delete('/:id', function (req, res) {
   });
 });
 
+
+router.get('/:id/team', function (req, res) {
+  var team = models.User.getTeam(req.params.id);
+  return res.send(team);
+});
+
 router.post('/:id/team', function (req, res) {
   var userId = req.params.id;
   var teacherId = req.body.teacherId;

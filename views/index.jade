@@ -3,10 +3,13 @@ extends layout
 block content
   .well
     h3 Your teacher team
-    each teacher in team
-      p= teacher.name
+    #user-team
+      each teacher in team
+        p= teacher.name
 
   .well
     h3 New Teachers
     each teacher in teachers
-      p= teacher.name
+      div
+        p #{teacher.name}
+          button.addToTeam(data-user-id="#{user._id}" data-teacher-id="#{teacher._id}") Add

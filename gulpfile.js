@@ -44,7 +44,8 @@ gulp.task('serve', function () {
 gulp.task('default', ['serve'], function () {
   var server = livereload();
   var watchPaths = [
-    'views/**/*'
+    'views/**/*',
+    'public/javascripts/*.js'
   ];
   gulp.watch(watchPaths).on('change', function (file) {
     server.changed(file.path);

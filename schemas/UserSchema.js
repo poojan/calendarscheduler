@@ -19,7 +19,7 @@ module.exports = function(mongoose, conn){
     }]
   });
 
-  UserSchema.statics.getTeam = function (teacherFilter, callback) {
+  UserSchema.statics.getTeam0 = function (teacherFilter, callback) {
     var promise = new mongoose.Promise();
     if (callback) { promise.addBack(callback); }
 
@@ -28,6 +28,20 @@ module.exports = function(mongoose, conn){
     teacherFilter = teacherFilter.length ? { $or: teacherFilter } : { 1: 2 };
     mongoose.model('Teacher').find(teacherFilter, fields, promise.resolve.bind(promise));
     //this.find({}, fields, promise.resolve.bind(promise));
+    return promise;
+  };
+
+  UserSchema.statics.getTeam = function (userId, callback) {
+
+    var promise = new mongoose.Promise();
+    if (callback) { promise.addBack(callback); }
+    this.findById(userId, function (err, user) {
+      var teacherFilter = user.team;
+
+      var fields = '_id name sex dob info image availability';
+      teacherFilter = teacherFilter.length ? { $or: teacherFilter } : { 1: 2 };
+      mongoose.model('Teacher').find(teacherFilter, fields, promise.resolve.bind(promise));
+    });
     return promise;
   };
 
