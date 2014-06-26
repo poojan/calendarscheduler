@@ -51,4 +51,16 @@ router.get('/faq', function(req, res) {
   res.render('faq', { username: username });
 });
 
+router.get('/fixtures/:cmd', function(req, res) {
+  var cmd = req.params.cmd;
+  if (cmd === 'reset' || cmd == 'remove') {
+    var exec = require('child_process').exec;
+    exec('./node_modules/mongoose-fixture/bin/mongoose-fixture --fixture="all" --' + cmd, function (error, stdout, stderr) {
+      return res.send(stderr);
+    });
+  } else {
+    res.redirect('/');
+  }
+});
+
 module.exports = router;
