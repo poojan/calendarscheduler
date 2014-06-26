@@ -13,19 +13,43 @@
 // Load the default object that helps manage a FixtureConfig
 var FixtureConfig = require('mongoose-fixture').FixtureConfig;
 
+var dbUser = 'admin';
+var dbPass = '5ePjWTMZljww';
+var dbName = 'calendarscheduler';
+
+//var mongoUri = 'mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/';
+//var mongoUri = 'mongodb://' + dbUser + ':' + dbPass + '@' + '$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/' + dbName;
+//console.log('mongoUri', mongoUri);
+
+//mongoUri = 'mongodb://localhost/calendar_scheduler';
+
 // Create our fixture config with defined
 // mongo-connection and file paths
 var fixtureConfig = FixtureConfig({
     mongoConnection:{
-        'host':'localhost',
-        'port':'27017',
-        'dbname':'calendar_scheduler'
+        'host':'$OPENSHIFT_MONGODB_DB_HOST',
+        'port':'$OPENSHIFT_MONGODB_DB_PORT',
+        'dbname': dbName,
+        'user': dbUser,
+        'pass': dbPass
     },
     paths:{
         schemaPath:__dirname+'/schemas/',
         dataFixturePath:__dirname+'/fixtures/'
     }
 });
+
+//var fixtureConfig = FixtureConfig({
+    //mongoConnection:{
+        //'host':'localhost',
+        //'port':'27017',
+        //'dbname':'calendar_scheduler'
+    //},
+    //paths:{
+        //schemaPath:__dirname+'/schemas/',
+        //dataFixturePath:__dirname+'/fixtures/'
+    //}
+//});
 
 
 // Create a Listing of fixtures
