@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .well
+    h3 Your teacher team
+    each teacher in team
+      p= teacher.name
+
+  .well
+    h3 New Teachers
+    each teacher in teachers
+      p= teacher.name

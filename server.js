@@ -2,12 +2,13 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+var app = require('./app');
 
 
 /**
  *  Define the sample application.
  */
-var SampleApp = function() {
+var CalendarSchedulerApp = function() {
 
     //  Scope.
     var self = this;
@@ -113,7 +114,8 @@ var SampleApp = function() {
      */
     self.initializeServer = function() {
         self.createRoutes();
-        self.app = express.createServer();
+        //self.app = express.createServer();
+        self.app = app;
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
@@ -153,7 +155,7 @@ var SampleApp = function() {
 /**
  *  main():  Main code.
  */
-var zapp = new SampleApp();
+var zapp = new CalendarSchedulerApp();
 zapp.initialize();
 zapp.start();
 

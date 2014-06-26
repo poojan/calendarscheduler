@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1 Book Lessons
+
+  - var daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+  each teacher in teachers
+    .well
+      p= teacher.name
+
+    table.table.table-bordered.table-striped
+      thead
+        tr
+          th Days
+          each val in daysOfWeek
+            th= val
+      tbody
+        tr
+          - for (var hh = 9; hh < 16; hh++)
+            each mm in [0,30]
+              tr
+                td #{hh}:#{mm==0 ? '00' : '30'} - #{hh+mm/30}:#{(mm+30)%60 == 0 ? '00':'30'}
+                each day in daysOfWeek
+                  - var isAvailable = false
+                  td
+                    each daysOfAvailability in teacher.availability
+                      if (daysOfAvailability.day == day)
+                        each timeSlot in daysOfAvailability.slots
+                          if (hh >= timeSlot.hh1 && hh <= timeSlot.hh2)
+                            button.btn.btn-xs.btn-primary Book
+                            - isAvailable = true
+
+                    if (isAvailable == false)
+                      p x
+
