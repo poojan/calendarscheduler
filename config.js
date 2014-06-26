@@ -16,10 +16,7 @@ if (!process.env.OPENSHIFT_NODEJS_IP) {
   dbPass = '5ePjWTMZljww';
   dbName = 'calendarscheduler';
   //mongoUri = 'mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/';
-
   console.log('process.env.OPENSHIFT_MONGODB_DB_HOST', process.env.OPENSHIFT_MONGODB_DB_HOST);
-  console.log('process.env.$OPENSHIFT_MONGODB_DB_HOST', process.env.$OPENSHIFT_MONGODB_DB_HOST);
-  console.log('$OPENSHIFT_MONGODB_DB_HOST', $OPENSHIFT_MONGODB_DB_HOST);
 }
 
 mongoUri = 'mongodb://' + dbHost + ':' + dbPort + '/' + dbName;
