@@ -11,6 +11,7 @@ var lessMiddleware = require('less-middleware');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var teacherApi = require('./routes/api/teacher');
+var userApi = require('./routes/api/user');
 var auth = require('./routes/auth');
 var user = require('./routes/user');
 
@@ -60,6 +61,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/api/teacher', teacherApi);
+app.use('/api/user', userApi);
 app.use('/auth', auth);
 app.use('/register', user.register);
 app.use('/login', user.login);
