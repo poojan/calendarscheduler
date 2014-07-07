@@ -1,7 +1,10 @@
 'use strict';
 
+var path = require('path');
 var express = require('express');
 var router = express.Router();
+
+var userRoles = require('../views/js/routingConfig').userRoles;
 
 var models = require('../models');
 
@@ -25,6 +28,17 @@ router.get('/', function(req, res) {
   });
 });
 */
+
+router.get('/partials/*', function (req, res) {
+  var requestedView = path.join('./', req.url);
+  res.render(requestedView);
+});
+
+router.get('/templates/*', function (req, res) {
+  var requestedView = path.join('./', req.url);
+  res.render(requestedView);
+});
+
 
 router.get('/', function (req, res) {
   var username = req.user ? req.user.username : '';
@@ -73,6 +87,19 @@ router.get('/fixtures/:cmd', function(req, res) {
   } else {
     res.redirect('/');
   }
+});
+
+router.get('/*', function (req, res) {
+  var role = userRoles.public, username = '';
+  if (req.user) {
+    role = req.user.role;
+    username = req.user.username;
+  }
+  res.cookie('user', JSON.stringify({
+    'username': username,
+    'role': role
+  }));
+  res.render('index');
 });
 
 module.exports = router;

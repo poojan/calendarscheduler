@@ -58,13 +58,13 @@ app.use(lessMiddleware(lessPath, {
 //app.use(express.static(cssPath));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 app.use('/users', users);
 app.use('/api/teacher', teacherApi);
 app.use('/api/user', userApi);
 app.use('/auth', auth);
-app.use('/register', user.register);
-app.use('/login', user.login);
+app.use('/', routes);
+//app.use('/register', user.register);
+//app.use('/login', user.login);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
