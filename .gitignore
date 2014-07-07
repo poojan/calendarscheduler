@@ -1,3 +1,4 @@
 node_modules/
-public/stylesheets/*
 bower_components/
+public/stylesheets/*
+public/lib/*
