@@ -49,7 +49,7 @@ app.use(lessMiddleware(lessPath, {
   prefix: '',
   preprocess: {
     path: function(pathname, req) {
-      return pathname.replace('/stylesheets/', '/');
+      return pathname.replace('/css/', '/');
     }
   },
   debug: true
