@@ -17,6 +17,17 @@ gulp.task('lib', function () {
     .pipe(gulp.dest(dest));
 });
 
+gulp.task('js', function () {
+  var src = [
+    'views/js/*.js'
+  ];
+  var dest = 'public/js/';
+
+  gulp.src(src)
+    .pipe(gulp.dest(dest));
+});
+
+
 gulp.task('test', function () {
   var src = [
     'test/unit/**/*.spec.js'
@@ -52,7 +63,9 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('default', ['lib', 'serve'], function () {
+gulp.task('build', ['lib', 'js']);
+
+gulp.task('default', ['build', 'serve'], function () {
   var server = livereload();
   var watchPaths = [
     'views/**/*',

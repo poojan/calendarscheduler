@@ -1,4 +1,6 @@
 $(function () {
+  'use strict';
+
   var addToTeamClickHandler = function (evt) {
     var teacherId = $(this).attr('data-teacher-id');
     var userId = $(this).attr('data-user-id');
