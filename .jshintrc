@@ -116,6 +116,9 @@
         //"iLoveDouglas"
     ],
     "globals": {
+      // angular
+      "angular": true,
+
       // mocha
       "describe": false,
       "it": false,
