@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "export HOME=/var/lib/openshift/53abca7c50044634240000e9/app-root/runtime/repo; ./node_modules/bower/bin/bower install"
+    "postinstall": "export HOME=$HOME/app-root/runtime/repo; ./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "body-parser": "~1.0.0",
