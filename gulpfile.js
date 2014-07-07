@@ -5,6 +5,8 @@ var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
+var jade = require('gulp-jade');
+var changed = require('gulp-changed');
 
 gulp.task('lib', function () {
   var src = [
@@ -15,6 +17,7 @@ gulp.task('lib', function () {
   var dest = 'public/lib/';
 
   gulp.src(src)
+    .pipe(changed(dest))
     .pipe(gulp.dest(dest));
 });
 
@@ -25,6 +28,19 @@ gulp.task('js', function () {
   var dest = 'public/js/';
 
   gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('jade', function () {
+  var src = [
+    'views/templates/*.jade'
+  ];
+  var dest = 'public/templates/';
+
+  gulp.src(src)
+    .pipe(changed(dest))
+    .pipe(jade())
     .pipe(gulp.dest(dest));
 });
 
@@ -64,15 +80,21 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('build', ['lib', 'js']);
+gulp.task('build', ['lib', 'jade', 'js']);
 
 gulp.task('default', ['build', 'serve'], function () {
   var server = livereload();
   var watchPaths = [
-    'views/**/*',
-    'public/js/*.js'
+    //'views/**/*'
+    //'views/*.jade',
+    'views/templates/*.jade',
+    'views/partials/*.jade',
+    //'views/less/*.less',
+    'views/js/*.js'
   ];
-  gulp.watch(watchPaths).on('change', function (file) {
+
+  gulp.watch(watchPaths, ['jade', 'js']).on('change', function (file) {
+    console.log('changed file.path', file.path);
     server.changed(file.path);
   });
 });

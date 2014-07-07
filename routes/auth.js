@@ -34,9 +34,9 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Auth' });
-});
+//router.get('/', function(req, res) {
+  //res.render('index', { title: 'Auth' });
+//});
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/..',

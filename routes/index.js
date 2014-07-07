@@ -6,6 +6,7 @@ var router = express.Router();
 var models = require('../models');
 
 /* GET home page. */
+/*
 router.get('/', function(req, res) {
   if (!req.user) { return res.redirect('/login'); }
 
@@ -21,6 +22,15 @@ router.get('/', function(req, res) {
     title: 'Express',
     teachers: teachers,
     team: team
+  });
+});
+*/
+
+router.get('/', function (req, res) {
+  var username = req.user ? req.user.username : '';
+  console.log('username', username);
+  res.render('index', {
+    username: username
   });
 });
 

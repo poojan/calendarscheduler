@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  ul
+    li
+      a(ui-sref="home") Home
+    li
+      a(ui-sref="login") Login
+    li
+      a(ui-sref="register") Register
+
+  p= username
+  div(ui-view)
