@@ -6,6 +6,17 @@ var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
 
+gulp.task('lib', function () {
+  var src = [
+    'bower_components/angular/angular.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.js'
+  ];
+  var dest = 'public/lib/';
+
+  gulp.src(src)
+    .pipe(gulp.dest(dest));
+});
+
 gulp.task('test', function () {
   var src = [
     'test/unit/**/*.spec.js'
@@ -41,11 +52,11 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('default', ['serve'], function () {
+gulp.task('default', ['lib', 'serve'], function () {
   var server = livereload();
   var watchPaths = [
     'views/**/*',
-    'public/javascripts/*.js'
+    'public/js/*.js'
   ];
   gulp.watch(watchPaths).on('change', function (file) {
     server.changed(file.path);
