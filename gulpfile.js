@@ -9,6 +9,7 @@ var gutil = require('gulp-util');
 gulp.task('lib', function () {
   var src = [
     'bower_components/angular/angular.js',
+    'bower_components/angular-route/angular-route.js',
     'bower_components/angular-ui-router/release/angular-ui-router.js'
   ];
   var dest = 'public/lib/';
