@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "build-js": "HOME=$HOME/app-root/runtime bower install"
   },
   "dependencies": {
     "body-parser": "~1.0.0",
