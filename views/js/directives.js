@@ -38,11 +38,18 @@ angular.module('CSApp')
 
 angular.module('CSApp')
   .directive('activeNav', function ($location) {
+    function normalizeUrl(url) {
+      if (url[url.length - 1] !== '/') {
+        url = url + '/';
+      }
+      return url;
+    }
+
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
         var anchor = element[0];
-        if (element[0].tagName.toUpperCase() != 'A') {
+        if (element[0].tagName.toUpperCase() !== 'A') {
           anchor = element.find('a')[0];
         }
         var path = anchor.href;
@@ -62,10 +69,4 @@ angular.module('CSApp')
       }
     };
 
-    function normalizeUrl(url) {
-      if (url[url.length - 1] !== '/') {
-        url = url + '/';
-      }
-      return url;
-    }
   });
