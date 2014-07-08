@@ -5,13 +5,25 @@ block content
     .navbar-inner
       .container-fluid
         ul.nav.nav-tabs
-          if (username)
-            li(data-access-level='accessLevels.anon')
-              a(ui-sref="user.home") Home
-          li(data-access-level='accessLevels.anon')
+          li(data-access-level='accessLevels.anon', active-nav)
             a(ui-sref="anon.login") Login
-          li(data-access-level='accessLevels.anon')
+          li(data-access-level='accessLevels.anon', active-nav)
             a(ui-sref="anon.register") Register
+
+          li(data-access-level='accessLevels.user', active-nav)
+            a(ui-sref="user.home") Home
+
+          li(data-access-level='accessLevels.user', active-nav)
+            a(ui-sref="user.book") Book
+
+          li(data-access-level='accessLevels.user', active-nav)
+            a(ui-sref="user.note") Note
+
+          li(data-access-level='accessLevels.user' active-nav)
+            a(ui-sref="user.chat") Chat
+
+          li(data-access-level='accessLevels.user' active-nav)
+            a(ui-sref="user.faq") FAQ
 
           li(data-access-level='accessLevels.user')
             p= username

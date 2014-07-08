@@ -50,8 +50,28 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
       })
       .state('user.home', {
         url: '/',
-        templateUrl: 'templates/home'
+        templateUrl: '/templates/home'
+      })
+      .state('user.book', {
+        url: '/book/',
+        templateUrl: '/templates/book'
+      })
+
+      .state('user.note', {
+        url: '/note/',
+        templateUrl: '/templates/note'
+      })
+
+      .state('user.chat', {
+        url: '/chat/',
+        templateUrl: '/templates/chat'
+      })
+
+      .state('user.faq', {
+        url: '/faq/',
+        templateUrl: '/templates/faq'
       });
+
 
     $urlRouterProvider.otherwise('/404');
 

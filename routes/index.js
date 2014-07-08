@@ -48,34 +48,34 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/book', function(req, res) {
-  if (!req.user) { res.redirect('/login'); }
+//router.get('/book', function(req, res) {
+  //if (!req.user) { res.redirect('/login'); }
 
-  var username = req.user ? req.user.username : '';
+  //var username = req.user ? req.user.username : '';
 
-  //var teachers = models.Teacher.getAll();
-  var teachers = models.User.getTeam(req.user._id);
+  ////var teachers = models.Teacher.getAll();
+  //var teachers = models.User.getTeam(req.user._id);
 
-  res.render('book', { username: username, title: 'Express', teachers: teachers });
-});
+  //res.render('book', { username: username, title: 'Express', teachers: teachers });
+//});
 
-router.get('/note', function(req, res) {
-  if (!req.user) { res.redirect('/login'); }
-  var username = req.user ? req.user.username : '';
-  res.render('note', { username: username });
-});
+//router.get('/note', function(req, res) {
+  //if (!req.user) { res.redirect('/login'); }
+  //var username = req.user ? req.user.username : '';
+  //res.render('note', { username: username });
+//});
 
-router.get('/chat', function(req, res) {
-  if (!req.user) { res.redirect('/login'); }
-  var username = req.user ? req.user.username : '';
-  res.render('chat', { username: username });
-});
+//router.get('/chat', function(req, res) {
+  //if (!req.user) { res.redirect('/login'); }
+  //var username = req.user ? req.user.username : '';
+  //res.render('chat', { username: username });
+//});
 
-router.get('/faq', function(req, res) {
-  if (!req.user) { res.redirect('/login'); }
-  var username = req.user ? req.user.username : '';
-  res.render('faq', { username: username });
-});
+//router.get('/faq', function(req, res) {
+  //if (!req.user) { res.redirect('/login'); }
+  //var username = req.user ? req.user.username : '';
+  //res.render('faq', { username: username });
+//});
 
 router.get('/fixtures/:cmd', function(req, res) {
   var cmd = req.params.cmd;
