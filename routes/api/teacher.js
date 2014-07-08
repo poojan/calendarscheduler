@@ -7,10 +7,34 @@ var models = require('../../models');
 
 /* GET teachers listing. */
 router.get('/', function(req, res) {
+  var filterTimeFrom = req.param('from');
+  var filterTimeTo = req.param('to');
+  var filterSex = req.param('sex');
+  var filterAge = req.param('age');
+  var filterWeekday = req.param('day');
+
   var fields = '_id name sex dob info image availability';
-  models.Teacher.find({}, fields).exec().then(function (teachers) {
+
+  var filter = {};
+  if (filterSex) { filter.sex = filterSex; }
+  if (filterWeekday) {
+    //filter.availability = { 'day': filterWeekday };
+    filter['availability.day'] = filterWeekday;
+    //if (filterTimeFrom) {
+      //filter.from = filterTimeFrom;
+    //}
+  }
+
+  //console.log(filter);
+
+  models.Teacher.find(filter, fields).exec().then(function (teachers) {
     res.json(teachers);
   });
+
+  //var fields = '_id name sex dob info image availability';
+  //models.Teacher.find({}, fields).exec().then(function (teachers) {
+    //res.json(teachers);
+  //});
 });
 
 router.post('/', function (req, res) {

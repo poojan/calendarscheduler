@@ -72,7 +72,7 @@ angular.module('CSApp')
   });
 
 angular.module('CSApp')
-  .directive('teacherSearchFilter', function (TimeSlots) {
+  .directive('teacherSearchFilter', function (TimeSlots, Restangular) {
     return {
       restrict: 'A',
       link: function (scope, elem, attrs) {
@@ -89,6 +89,11 @@ angular.module('CSApp')
           'TOEFL': false
         };
 
+        //Restangular.all('teacher').getList().then(function (teacher) {
+          ////console.log(teacher);
+          //scope.teachers = teacher;
+        //});
+
         scope.isActive = function (dayNo) {
           return dayNo === scope.filterWeekday ? 'active':'';
         };
@@ -103,6 +108,14 @@ angular.module('CSApp')
           console.log('filterAge', scope.filterAge);
           console.log('filterClasses', scope.filterClasses);
           console.log('');
+
+          var queryParams = {
+            day: scope.filterWeekday
+          };
+
+          Restangular.all('teacher').getList(queryParams).then(function (teacher) {
+            scope.teachers = teacher;
+          });
         };
       },
       templateUrl: '/templates/teacherSearchFilter'

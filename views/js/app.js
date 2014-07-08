@@ -1,8 +1,8 @@
 'use strict';
 /* global routingConfig */
 
-var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+var app = angular.module('CSApp', ['ngCookies', 'ui.router', 'restangular'])
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider) {
     //$urlRouterProvider.otherwise('/');
     //
     var access = routingConfig.accessLevels;
@@ -131,6 +131,7 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
       };
     });
 
+    RestangularProvider.setBaseUrl('/api');
   })
   .run(function ($rootScope, $state, Auth) {
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {

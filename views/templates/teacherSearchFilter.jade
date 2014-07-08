@@ -33,16 +33,8 @@ form.form-inline.searchFilters
       label(ng-repeat="(class,enabled) in filterClasses")
         input(data-ng-model="filterClasses[class]" type="checkbox")
         | {{class}}
-    div.
-      <label ng-repeat="fruitName in fruits">
-      <input
-      type="checkbox"
-      name="selectedFruits[]"
-      value="{{fruitName}}"
-      ng-checked="selection.indexOf(fruitName) > -1"
-      ng-click="toggleSelection(fruitName)"
-      > {{fruitName}}
-      </label>
   .keyword
 
   button(ng-click="search()") Search
+
+  div(ng-repeat="teacher in teachers") {{teacher.name}}
