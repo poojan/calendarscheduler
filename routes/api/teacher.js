@@ -19,43 +19,27 @@ router.get('/', function(req, res) {
   filter.$and = [];
 
   if (filterSex) {
-    //filter.sex = filterSex;
     filter.$and.push({ 'sex': filterSex });
   }
-  //if (filterAge) { filter.age = filterAge; }
+
   if (filterAge) {
     filterAge = filterAge * 1;
     filter.$and.push({'age': {'$gte': filterAge}});
     filter.$and.push({'age': {'$lt': filterAge + 10 }});
-    //filter = { '$and': [ {'age': {'$gte': filterAge}}, {'age': {'$lt': filterAge + 10 }} ] };
-    //filter['age'] = { '$and': [ {'age': {'$gte': filterAge}}, {'age': {'$lt': filterAge + 10 }} ] };
-   //db.teachers.find({$and:[ {"age": {"$gte":10}},{"age":{"$lt":40}} ]})
   }
   if (filterWeekday) {
-    //filter.availability = { 'day': filterWeekday };
     filter.$and.push({'availability.day': filterWeekday });
     if (filterTimeFrom) {
-      //filter.from = filterTimeFrom;
-      //filter['availability.slots.timeFrom'] = { '$gte': filterTimeFrom };
       filter.$and.push({'availability.slots.timeFrom': { '$gte': filterTimeFrom }});
     }
     if (filterTimeTo) {
-      //filter['availability.slots.timeTo'] = { '$lt': filterTimeTo };
       filter.$and.push({'availability.slots.timeTo': { '$lt': filterTimeTo }});
     }
   }
-    //console.log(JSON.stringify(filter));
-
-  //console.log(filter);
 
   models.Teacher.find(filter, fields).exec().then(function (teachers) {
     res.json(teachers);
   });
-
-  //var fields = '_id name sex dob info image availability';
-  //models.Teacher.find({}, fields).exec().then(function (teachers) {
-    //res.json(teachers);
-  //});
 });
 
 router.post('/', function (req, res) {
