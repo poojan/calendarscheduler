@@ -17,6 +17,23 @@ angular.module('CSApp')
   });
 
 angular.module('CSApp')
+  .controller('SearchCtrl', function ($rootScope, $scope, $location, Auth) {
+    console.log('SearchCtrl', Auth.user);
+    //$scope.user = Auth.user;
+    //$scope.userRoles = Auth.userRoles;
+    //$scope.accessLevels = Auth.accessLevels;
+
+    //$scope.logout = function () {
+      //Auth.logout(function () {
+        //$location.path('/login');
+      //}, function () {
+        //$rootScope.error = 'Failed to logout';
+      //});
+    //};
+  });
+
+
+angular.module('CSApp')
   .controller('LoginCtrl', function ($rootScope, $scope, $location, $window, Auth) {
     console.log('LoginCtrl');
     $scope.rememberme = true;

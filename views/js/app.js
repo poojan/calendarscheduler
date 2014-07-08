@@ -38,6 +38,11 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
         url: '/register/',
         templateUrl: '/templates/register',
         controller: 'RegisterCtrl'
+      })
+      .state('anon.search', {
+        url: '/search/',
+        templateUrl: '/templates/search',
+        controller: 'SearchCtrl'
       });
 
     $stateProvider
