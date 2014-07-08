@@ -109,9 +109,10 @@ angular.module('CSApp')
           console.log('filterClasses', scope.filterClasses);
           console.log('');
 
-          var queryParams = {
-            day: scope.filterWeekday
-          };
+          var queryParams = {};
+
+          if (scope.filterWeekday) { queryParams.day = scope.filterWeekday; }
+          if (scope.filterSex) { queryParams.sex = scope.filterSex; }
 
           Restangular.all('teacher').getList(queryParams).then(function (teacher) {
             scope.teachers = teacher;

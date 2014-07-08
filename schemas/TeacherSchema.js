@@ -22,10 +22,8 @@ module.exports = function(mongoose, conn){
       // TODO
       "day": { type: String },
       "slots": [{
-        "hh1": { type: Number },
-        "mm1": { type: Number },
-        "hh2": { type: Number },
-        "mm2": { type: Number }
+        "timeFrom": { type: Number },
+        "timeTo": { type: Number }
       }]
     }]
   });
