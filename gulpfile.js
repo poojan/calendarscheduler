@@ -5,15 +5,16 @@ var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
-var jade = require('gulp-jade');
 var changed = require('gulp-changed');
 
 gulp.task('lib', function () {
   var src = [
+    'bower_components/lodash/dist/lodash.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-cookies/angular-cookies.js',
     'bower_components/angular-route/angular-route.js',
-    'bower_components/angular-ui-router/release/angular-ui-router.js'
+    'bower_components/angular-ui-router/release/angular-ui-router.js',
+    'bower_components/restangular/dist/restangular.js'
   ];
   var dest = 'public/lib/';
 
@@ -32,19 +33,6 @@ gulp.task('js', function () {
     .pipe(changed(dest))
     .pipe(gulp.dest(dest));
 });
-
-gulp.task('jade', function () {
-  var src = [
-    'views/templates/*.jade'
-  ];
-  var dest = 'public/templates/';
-
-  gulp.src(src)
-    .pipe(changed(dest))
-    .pipe(jade())
-    .pipe(gulp.dest(dest));
-});
-
 
 gulp.task('test', function () {
   var src = [
@@ -81,20 +69,15 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('build', ['lib', 'jade', 'js']);
+gulp.task('build', ['lib', 'js']);
 
 gulp.task('default', ['build', 'serve'], function () {
   var server = livereload();
   var watchPaths = [
-    //'views/**/*'
-    //'views/*.jade',
-    'views/templates/*.jade',
-    'views/partials/*.jade',
-    //'views/less/*.less',
-    'views/js/*.js'
+    'views/**/*'
   ];
 
-  gulp.watch(watchPaths, ['jade', 'js']).on('change', function (file) {
+  gulp.watch(watchPaths, ['js']).on('change', function (file) {
     console.log('changed file.path', file.path);
     server.changed(file.path);
   });

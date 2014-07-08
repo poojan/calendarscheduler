@@ -17,6 +17,7 @@
     "angular-ui-router": "~0.2.10",
     "angular": "~1.2.19",
     "angular-route": "~1.2.19",
-    "angular-cookies": "~1.2.19"
+    "angular-cookies": "~1.2.19",
+    "restangular": "~1.4.0"
   }
 }
