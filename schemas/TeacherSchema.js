@@ -16,6 +16,7 @@ module.exports = function(mongoose, conn){
     "name": { type: String, required: true, unique: true },
     "sex": { type: String },
     "dob": { type: Date },
+    "age": { type: Number },
     "info": { type: String },
     "image": { type: String },
     "availability": [{
@@ -26,6 +27,14 @@ module.exports = function(mongoose, conn){
         "timeTo": { type: Number }
       }]
     }]
+  });
+
+  TeacherSchema.path('dob').set(function (value) {
+    var diff = new Date(Date.now() - Date.parse(value));
+    var age = diff.getUTCFullYear() - 1970;
+    this.age = age;
+
+    return value;
   });
 
   TeacherSchema.statics.getAll = function (callback) {

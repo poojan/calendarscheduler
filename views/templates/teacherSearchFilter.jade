@@ -38,4 +38,6 @@ form.form-inline.searchFilters
 
   button(ng-click="search()") Search
 
-  div(ng-repeat="teacher in teachers") {{teacher.name}}
+  div(ng-repeat="teacher in teachers")
+    | {{teacher.name}}
+    | {{teacher.age}}

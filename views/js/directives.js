@@ -79,8 +79,8 @@ angular.module('CSApp')
         var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var date = new Date();
         scope.filterWeekday = weekdays[date.getDay()];
-        scope.timeSlots = TimeSlots.get(1000, 1300);
-        scope.ages = [20,30,40,50,60,70,80,90];
+        scope.timeSlots = TimeSlots.get(1000, 1800);
+        scope.ages = [10,20,30,40,50,60,70,80,90];
         //scope.classes = ['Japanese', 'Business', 'TOEIC', 'TOEFL'];
         scope.filterClasses = {
           'Japanese': false,
@@ -112,7 +112,10 @@ angular.module('CSApp')
           var queryParams = {};
 
           if (scope.filterWeekday) { queryParams.day = scope.filterWeekday; }
+          if (scope.filterAge) { queryParams.age = scope.filterAge; }
           if (scope.filterSex) { queryParams.sex = scope.filterSex; }
+          if (scope.filterTimeFrom) { queryParams.from = scope.filterTimeFrom; }
+          if (scope.filterTimeTo) { queryParams.to = scope.filterTimeTo; }
 
           Restangular.all('teacher').getList(queryParams).then(function (teacher) {
             scope.teachers = teacher;
