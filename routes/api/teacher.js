@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
   var filterSex = req.param('sex');
   var filterAge = req.param('age');
   var filterWeekday = req.param('day');
+  var filterExpertise = req.param('expertise');
 
   var fields = '_id name sex dob age info image availability expertise';
 
@@ -35,6 +36,10 @@ router.get('/', function(req, res) {
     if (filterTimeTo) {
       filter.$and.push({'availability.slots.timeTo': { '$lt': filterTimeTo }});
     }
+  }
+
+  if (filterExpertise) {
+    filter.$and.push({ 'expertise': filterExpertise });
   }
 
   if (!filter.$and.length) {

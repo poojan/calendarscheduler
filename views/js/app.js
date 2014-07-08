@@ -1,7 +1,7 @@
 'use strict';
 /* global routingConfig */
 
-var app = angular.module('CSApp', ['ngCookies', 'ui.router', 'restangular'])
+var app = angular.module('CSApp', ['ngCookies', 'ui.router', 'restangular', 'ui.bootstrap'])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, RestangularProvider) {
     //$urlRouterProvider.otherwise('/');
     //

@@ -32,7 +32,8 @@ form.form-inline.searchFilters
 
   .expertise.form-group
     label Keywords
-    input(type="text" data-ng-model="keywords")
+    input(type="text" data-ng-model="filterKeywords" typeahead="exp for exp in expertise")
+
   //-.class
     .checkbox
       label(ng-repeat="(class,enabled) in filterClasses")

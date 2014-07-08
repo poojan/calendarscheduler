@@ -12,6 +12,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var teacherApi = require('./routes/api/teacher');
 var userApi = require('./routes/api/user');
+var expertiseApi = require('./routes/api/expertise');
 var auth = require('./routes/auth');
 var user = require('./routes/user');
 
@@ -61,6 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', users);
 app.use('/api/teacher', teacherApi);
 app.use('/api/user', userApi);
+app.use('/api/expertise', expertiseApi);
 app.use('/auth', auth);
 app.use('/', routes);
 //app.use('/register', user.register);

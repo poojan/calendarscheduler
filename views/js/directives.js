@@ -101,13 +101,13 @@ angular.module('CSApp')
           scope.filterWeekday = weekday;
         };
         scope.search = function () {
-          console.log('filterWeekday', scope.filterWeekday);
-          console.log('filterSex', scope.filterSex);
-          console.log('filterTimeFrom', scope.filterTimeFrom);
-          console.log('filterTimeTo', scope.filterTimeTo);
-          console.log('filterAge', scope.filterAge);
-          console.log('filterClasses', scope.filterClasses);
-          console.log('');
+          //console.log('filterWeekday', scope.filterWeekday);
+          //console.log('filterSex', scope.filterSex);
+          //console.log('filterTimeFrom', scope.filterTimeFrom);
+          //console.log('filterTimeTo', scope.filterTimeTo);
+          //console.log('filterAge', scope.filterAge);
+          //console.log('filterClasses', scope.filterClasses);
+          //console.log('');
 
           var queryParams = {};
 
@@ -116,11 +116,23 @@ angular.module('CSApp')
           if (scope.filterSex) { queryParams.sex = scope.filterSex; }
           if (scope.filterTimeFrom) { queryParams.from = scope.filterTimeFrom; }
           if (scope.filterTimeTo) { queryParams.to = scope.filterTimeTo; }
+          if (scope.filterKeywords) { queryParams.expertise = scope.filterKeywords; }
 
           Restangular.all('teacher').getList(queryParams).then(function (teacher) {
             scope.teachers = teacher;
           });
+
         };
+
+        scope.$watch(function() {
+          return scope.filterKeywords;
+        }, function (key) {
+          var expertiseQueryParams = {};
+          if (scope.filterKeywords) { expertiseQueryParams.keyword = scope.filterKeywords; }
+          Restangular.all('expertise').getList(expertiseQueryParams).then(function (exp) {
+            scope.expertise = exp;
+          });
+        });
       },
       templateUrl: '/templates/teacherSearchFilter'
     };
