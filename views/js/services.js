@@ -58,3 +58,38 @@ angular.module('CSApp')
       user: currentUser
     };
   });
+
+
+angular.module('CSApp')
+  .factory('TimeSlots', function ($http, $cookieStore) {
+    return {
+      get: function (from, to) {
+        //console.log(from, to);
+        //for (var i = from; i < to; i = i + 30) {
+          //console.log(i);
+        //}
+        var timeSlots = [from];
+        //var timesStrings = [];
+        var t = from;
+        var h, m;
+        while (t < to) {
+          t = t + 30;
+          //console.log(t%100);
+          h = parseInt(t/100);
+          m = parseInt(t % 100);
+
+          if (m >= 60) {
+            m = m - 60;
+            h = h + 1;
+            t = h * 100 + m;
+          }
+
+          timeSlots.push(t);
+          //timesStrings.push(h + ':' + m);
+        }
+        //console.log(times);
+        //console.log(timesStrings);
+        return timeSlots;
+      }
+    };
+  });

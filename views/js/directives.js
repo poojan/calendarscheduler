@@ -72,18 +72,37 @@ angular.module('CSApp')
   });
 
 angular.module('CSApp')
-  .directive('teacherSearchFilter', function () {
+  .directive('teacherSearchFilter', function (TimeSlots) {
     return {
       restrict: 'A',
       link: function (scope, elem, attrs) {
         var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         var date = new Date();
-        scope.weekday = weekdays[date.getDay()];
-        scope.isActive = function (dayNo) {
-          return dayNo === scope.weekday ? 'active':'';
+        scope.filterWeekday = weekdays[date.getDay()];
+        scope.timeSlots = TimeSlots.get(1000, 1300);
+        scope.ages = [20,30,40,50,60,70,80,90];
+        //scope.classes = ['Japanese', 'Business', 'TOEIC', 'TOEFL'];
+        scope.filterClasses = {
+          'Japanese': false,
+          'Business': false,
+          'TOEIC': false,
+          'TOEFL': false
         };
-        scope.activate = function (dayNo) {
-          scope.weekday = dayNo;
+
+        scope.isActive = function (dayNo) {
+          return dayNo === scope.filterWeekday ? 'active':'';
+        };
+        scope.activate = function (weekday) {
+          scope.filterWeekday = weekday;
+        };
+        scope.search = function () {
+          console.log('filterWeekday', scope.filterWeekday);
+          console.log('filterSex', scope.filterSex);
+          console.log('filterTimeFrom', scope.filterTimeFrom);
+          console.log('filterTimeTo', scope.filterTimeTo);
+          console.log('filterAge', scope.filterAge);
+          console.log('filterClasses', scope.filterClasses);
+          console.log('');
         };
       },
       templateUrl: '/templates/teacherSearchFilter'

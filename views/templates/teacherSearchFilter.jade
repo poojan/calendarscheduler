@@ -2,7 +2,7 @@
 - var date = new Date()
 - var dayNoOfWeek = date.getDay()
 
-.searchFilters
+form.form-inline.searchFilters
   .weekdays
     - for (i = dayNoOfWeek; i < dayNoOfWeek + 7; i++)
       - var weekdayLabel = weekdays[i % 7]
@@ -12,5 +12,37 @@
         - weekdayLabel = 'Today'
         - isActive = 'active'
 
-      a(ng-class="{active:weekday=='#{weekday}'}" ng-click="activate('#{weekday}')")
+      a(ng-class="{active:filterWeekday=='#{weekday}'}" ng-click="activate('#{weekday}')")
         div.weekday= weekdayLabel
+
+  .time.form-group
+    label Time:
+    select.form-control(data-ng-model="filterTimeFrom" ng-options="time as time|timeReadable for time in timeSlots")
+    select.form-control(data-ng-model="filterTimeTo" ng-options="time as time|timeReadable for time in timeSlots")
+
+  .sex.form-group
+    label Sex
+    select.form-control(data-ng-model="filterSex")
+      option(value="m") Male
+      option(value="f") Female
+  .age.form-group
+    label Age
+      select.form-control(data-ng-model="filterAge" ng-options="age as age|decade for age in ages")
+  .class
+    .checkbox
+      label(ng-repeat="(class,enabled) in filterClasses")
+        input(data-ng-model="filterClasses[class]" type="checkbox")
+        | {{class}}
+    div.
+      <label ng-repeat="fruitName in fruits">
+      <input
+      type="checkbox"
+      name="selectedFruits[]"
+      value="{{fruitName}}"
+      ng-checked="selection.indexOf(fruitName) > -1"
+      ng-click="toggleSelection(fruitName)"
+      > {{fruitName}}
+      </label>
+  .keyword
+
+  button(ng-click="search()") Search
