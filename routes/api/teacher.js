@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
   var filterAge = req.param('age');
   var filterWeekday = req.param('day');
 
-  var fields = '_id name sex dob age info image availability';
+  var fields = '_id name sex dob age info image availability expertise';
 
   var filter = {};
   filter.$and = [];
@@ -37,6 +37,11 @@ router.get('/', function(req, res) {
     }
   }
 
+  if (!filter.$and.length) {
+    console.log('no filters');
+    filter = {};
+  }
+  //console.log('test', filter);
   models.Teacher.find(filter, fields).exec().then(function (teachers) {
     res.json(teachers);
   });
@@ -48,6 +53,7 @@ router.post('/', function (req, res) {
   var dob = req.body.dob;
   var info = req.body.info;
   var image = req.body.image;
+  var expertise = req.body.expertise;
   var availability = req.body.availability;
 
   var newTeacher = new models.Teacher({
@@ -56,7 +62,8 @@ router.post('/', function (req, res) {
     'dob': dob,
     'info': info,
     'image': image,
-    'availability': availability
+    'availability': availability,
+    'expertise': expertise
   });
 
   newTeacher.save(function (err, newTeacher, numberAffected) {
@@ -66,7 +73,7 @@ router.post('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  var fields = '_id name sex dob age info image availability';
+  var fields = '_id name sex dob age info image availability expertise';
   var teacherId = req.params.id;
   var teacher = models.Teacher.findById(teacherId, fields).exec()
     .then(function (err, teacher) {

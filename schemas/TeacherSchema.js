@@ -26,7 +26,8 @@ module.exports = function(mongoose, conn){
         "timeFrom": { type: Number },
         "timeTo": { type: Number }
       }]
-    }]
+    }],
+    "expertise": [{ type: String }]
   });
 
   TeacherSchema.path('dob').set(function (value) {
