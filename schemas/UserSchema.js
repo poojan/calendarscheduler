@@ -12,6 +12,10 @@ module.exports = function(mongoose, conn){
   var UserSchema = new mongoose.Schema({
     'username': { type: String, required: true, unique: true },
     'password': { type: String, required: true },
+    'role': {
+      'title': { type: String, required: true },
+      'bitMask': { type: Number, required: true }
+    },
     'totalLessonTime': { type: Number },
     'totalOvercomeWeakness': { type: Number },
     'team': [{

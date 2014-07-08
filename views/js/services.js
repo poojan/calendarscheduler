@@ -26,7 +26,7 @@ angular.module('CSApp')
         if (user === undefined) {
           user = currentUser;
         }
-        return user.role.title === userRoles.user.title || user.role.title === userROles.admin.title;
+        return user.role.title === userRoles.user.title || user.role.title === userRoles.admin.title;
       },
 
       register: function (user, success, error) {
@@ -44,7 +44,7 @@ angular.module('CSApp')
       },
 
       logout: function (success, error) {
-        $http.post('/logout').success(function () {
+        $http.post('/auth/logout').success(function () {
           changeUser({
             username: '',
             role: userRoles.public

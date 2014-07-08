@@ -1,12 +1,18 @@
 h1 Login
 
-form(role="form" method="post" action="/auth/login")
+form(role="form" ng-submit="login()" name="loginForm")
   .form-group
     label(for='username') Username
-    input#username.form-control(name='username' type='text' placeholder='username' required)
+    input#username.form-control(data-ng-model='username' name='username' type='text' placeholder='username' required)
 
   .form-group
     label(for='password') Password
-    input#password.form-control(name='password' type='password' placeholder='password')
+    input#password.form-control(data-ng-model="password" name='password' type='password' placeholder='password')
+
+  //-.form-group
+    .checkbox
+      label(for="rememberme").checkbox
+        input(type="checkbox" data-ng-model="rememberme" name+"rememberme")
+        | Remember me
 
   button.btn.btn-default(type="submit") Submit

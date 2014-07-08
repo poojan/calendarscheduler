@@ -1,16 +1,16 @@
 h1 Register
 
-form(role="form" method="post" action="/auth/register")
+form(role="form" ng-submit="register()" name="registerForm")
   .form-group
     label(for='username') Username
-    input#username.form-control(name='username' type='text' placeholder='username' required)
+    input#username.form-control(data-ng-model='username' name='username' type='text' placeholder='username' required)
 
   .form-group
     label(for='password') Password
-    input#password.form-control(name='password' type='password' placeholder='password')
+    input#password.form-control(data-ng-model='password' name='password' type='password' placeholder='password')
 
   .form-group
     label(for='password2') Repeat Password
-    input#password2.form-control(name='password2' type='password' placeholder='repeat password')
+    input#password2.form-control(data-ng-model='password2' name='password2' type='password' placeholder='repeat password')
 
   button.btn.btn-default(type="submit") Submit

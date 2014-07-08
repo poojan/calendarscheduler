@@ -1,13 +1,21 @@
 extends layout
 
 block content
-  ul
-    li
-      a(ui-sref="anon.home") Home
-    li
-      a(ui-sref="anon.login") Login
-    li
-      a(ui-sref="anon.register") Register
+  .navbar(data-ng-controller='NavCtrl')
+    .navbar-inner
+      .container-fluid
+        ul.nav.nav-tabs
+          if (username)
+            li(data-access-level='accessLevels.anon')
+              a(ui-sref="user.home") Home
+          li(data-access-level='accessLevels.anon')
+            a(ui-sref="anon.login") Login
+          li(data-access-level='accessLevels.anon')
+            a(ui-sref="anon.register") Register
 
-  p= username
+          li(data-access-level='accessLevels.user')
+            p= username
+          li(data-access-level='accessLevels.user')
+            a(data-ng-click="logout()") Logout
+
   div(ui-view)

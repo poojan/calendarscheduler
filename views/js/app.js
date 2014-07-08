@@ -2,7 +2,7 @@
 /* global routingConfig */
 
 var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     //$urlRouterProvider.otherwise('/');
     //
     var access = routingConfig.accessLevels;
@@ -17,7 +17,7 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
       })
       .state('public.404', {
         url: '/404/',
-        templateUrl: '404'
+        templateUrl: '/templates/404'
       });
 
     // Anonymous routes
@@ -41,10 +41,42 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
       });
 
     $stateProvider
-      .state('anon.home', {
+      .state('user', {
+        abstract: true,
+        template: '<ui-view/>',
+        data: {
+          access: access.user
+        }
+      })
+      .state('user.home', {
         url: '/',
-        templateUrl: '/templates/home'
+        templateUrl: 'templates/home'
       });
+
+    $urlRouterProvider.otherwise('/404');
+
+    $urlRouterProvider.rule(function ($injector, $location) {
+      if ($location.protocol() === 'file') { return; }
+
+      var path = $location.path(),
+          search = $location.search(),
+          params;
+
+      // check to see if the path already ends in '/'
+      if (path[path.length - 1] === '/') { return; }
+
+      // If there was no search string / query params, return with a '/'
+      if (Object.keys(search).length === 0) {
+        return path + '/';
+      }
+
+      // Otherwise build the search string and return a '/?' prefix
+      params = [];
+      angular.forEach(search, function (v, k) {
+        params.push(k + '=' + v);
+      });
+      return path + '/?' + params.join('&');
+    });
       /*
     $stateProvider
       .state('home', {
@@ -62,6 +94,17 @@ var app = angular.module('CSApp', ['ngCookies', 'ui.router'])
      */
 
     $locationProvider.html5Mode(true);
+
+    $httpProvider.interceptors.push(function ($q, $location) {
+      return {
+        'responseError': function (response) {
+          if (response.status === 401 || response.status === 403) {
+            $location.path('/login');
+          }
+          return $q.reject(response);
+        }
+      };
+    });
 
   })
   .run(function ($rootScope, $state, Auth) {
