@@ -70,3 +70,22 @@ angular.module('CSApp')
     };
 
   });
+
+angular.module('CSApp')
+  .directive('teacherSearchFilter', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, elem, attrs) {
+        var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        var date = new Date();
+        scope.weekday = weekdays[date.getDay()];
+        scope.isActive = function (dayNo) {
+          return dayNo === scope.weekday ? 'active':'';
+        };
+        scope.activate = function (dayNo) {
+          scope.weekday = dayNo;
+        };
+      },
+      templateUrl: '/templates/teacherSearchFilter'
+    };
+  });

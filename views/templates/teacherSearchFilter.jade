@@ -1,0 +1,16 @@
+- var weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+- var date = new Date()
+- var dayNoOfWeek = date.getDay()
+
+.searchFilters
+  .weekdays
+    - for (i = dayNoOfWeek; i < dayNoOfWeek + 7; i++)
+      - var weekdayLabel = weekdays[i % 7]
+      - var weekday = weekdayLabel
+      - var isActive = ''
+      - if (i == dayNoOfWeek)
+        - weekdayLabel = 'Today'
+        - isActive = 'active'
+
+      a(ng-class="{active:weekday=='#{weekday}'}" ng-click="activate('#{weekday}')")
+        div.weekday= weekdayLabel
