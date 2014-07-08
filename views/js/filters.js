@@ -23,3 +23,11 @@ angular.module('CSApp')
       return input + "'s";
     };
   });
+
+angular.module('CSApp')
+  .filter('sex', function() {
+    return function (input) {
+      if (input === 'm') { return 'Male'; }
+      if (input === 'f') { return 'Female'; }
+    };
+  });

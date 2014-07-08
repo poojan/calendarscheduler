@@ -28,8 +28,8 @@ form.form-inline.searchFilters
       option(value="f") Female
   .age.form-group
     label Age
-      select.form-control(data-ng-model="filterAge" ng-options="age as age|decade for age in ages")
-  .class
+    select.form-control(data-ng-model="filterAge" ng-options="age as age|decade for age in ages")
+  //-.class
     .checkbox
       label(ng-repeat="(class,enabled) in filterClasses")
         input(data-ng-model="filterClasses[class]" type="checkbox")
@@ -38,6 +38,21 @@ form.form-inline.searchFilters
 
   button(ng-click="search()") Search
 
-  div(ng-repeat="teacher in teachers")
-    | {{teacher.name}}
-    | {{teacher.age}}
+.results
+  div.teacher(ng-repeat="teacher in teachers")
+    h4 {{teacher.name}}
+    p Sex: {{teacher.sex | sex}}
+    p Age: {{teacher.age}}
+    p Info: {{teacher.info}}
+    p Availability:
+    pre
+      div(ng-repeat="availability in teacher.availability")
+        p {{availability.day}}:
+          = ' '
+          span(ng-repeat="slot in availability.slots") {{slot.timeFrom}}-{{slot.timeTo}}
+            = ' '
+
+
+      //-p ( {{availability.timeFrom}} - {{availability.timeTo}} )
+      //-p {{teacher.availability}}
+
