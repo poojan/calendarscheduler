@@ -32,7 +32,7 @@ form.form-inline.searchFilters
 
   .expertise.form-group
     label Keywords
-    input(type="text" data-ng-model="filterKeywords" typeahead="exp for exp in expertise")
+    input(type="text" data-ng-model="filterKeywords" typeahead="exp for exp in expertise | filter:$viewValue")
 
   //-.class
     .checkbox
