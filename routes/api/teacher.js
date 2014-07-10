@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
   var filterAge = req.param('age');
   var filterWeekday = req.param('day');
   var filterExpertise = req.param('expertise');
+  var filterClasses = req.param('classes');
 
   var fields = '_id name sex dob age info image availability expertise';
 
@@ -38,15 +39,26 @@ router.get('/', function(req, res) {
     }
   }
 
+  var classes = [];
+
+  if (filterClasses) {
+    classes = filterClasses.split(',').map(function (cl) {
+      return { 'expertise': cl };
+    });
+  }
+
   if (filterExpertise) {
-    filter.$and.push({ 'expertise': filterExpertise });
+    classes.push({ 'expertise': filterExpertise });
+  }
+
+  if (filterExpertise || filterClasses) {
+    filter.$and.push({ '$or': classes });
   }
 
   if (!filter.$and.length) {
-    console.log('no filters');
     filter = {};
   }
-  //console.log('test', filter);
+
   models.Teacher.find(filter, fields).exec().then(function (teachers) {
     res.json(teachers);
   });

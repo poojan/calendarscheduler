@@ -34,12 +34,17 @@ form.form-inline.searchFilters
     label Keywords
     input(type="text" data-ng-model="filterKeywords" typeahead="exp for exp in expertise | filter:$viewValue")
 
-  //-.class
+  .class
+    label Classes:
+    br
     .checkbox
-      label(ng-repeat="(class,enabled) in filterClasses")
-        input(data-ng-model="filterClasses[class]" type="checkbox")
+      label(ng-repeat="(class,enabled) in classes")
+        input(data-ng-model="classes[class]" type="checkbox")
         | {{class}}
-  .keyword
+
+  //-Lazy man's margins :-)
+  br
+  br
 
   button(ng-click="search()") Search
 

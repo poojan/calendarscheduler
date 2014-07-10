@@ -118,6 +118,7 @@
     "globals": {
       // angular
       "angular": true,
+      "_": true,
 
       // mocha
       "describe": false,

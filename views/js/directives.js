@@ -81,18 +81,6 @@ angular.module('CSApp')
         scope.filterWeekday = weekdays[date.getDay()];
         scope.timeSlots = TimeSlots.get(1000, 1800);
         scope.ages = [10,20,30,40,50,60,70,80,90];
-        //scope.classes = ['Japanese', 'Business', 'TOEIC', 'TOEFL'];
-        scope.filterClasses = {
-          'Japanese': false,
-          'Business': false,
-          'TOEIC': false,
-          'TOEFL': false
-        };
-
-        //Restangular.all('teacher').getList().then(function (teacher) {
-          ////console.log(teacher);
-          //scope.teachers = teacher;
-        //});
 
         scope.isActive = function (dayNo) {
           return dayNo === scope.filterWeekday ? 'active':'';
@@ -109,6 +97,17 @@ angular.module('CSApp')
           //console.log('filterClasses', scope.filterClasses);
           //console.log('');
 
+          var classesQueryParams = {};
+          var filterClassesArr = [];
+          var c;
+
+          for (c in scope.classes) {
+            if (classes[c] === true) {
+              filterClassesArr.push(c);
+            }
+          }
+          scope.filterClasses = filterClassesArr.join(',');
+
           var queryParams = {};
 
           if (scope.filterWeekday) { queryParams.day = scope.filterWeekday; }
@@ -117,12 +116,23 @@ angular.module('CSApp')
           if (scope.filterTimeFrom) { queryParams.from = scope.filterTimeFrom; }
           if (scope.filterTimeTo) { queryParams.to = scope.filterTimeTo; }
           if (scope.filterKeywords) { queryParams.expertise = scope.filterKeywords; }
+          if (scope.filterClasses) { queryParams.classes = scope.filterClasses; }
 
           Restangular.all('teacher').getList(queryParams).then(function (teacher) {
             scope.teachers = teacher;
           });
 
         };
+
+        scope.classes = {};
+        var classes = {};
+        Restangular.all('expertise').getList().then(function (exp) {
+          var filterClasses = {};
+          _.each(exp, function (ex) {
+            classes[ex] = false;
+          });
+          scope.classes = classes;
+        });
 
         scope.$watch(function() {
           return scope.filterKeywords;
